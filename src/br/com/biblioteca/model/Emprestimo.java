@@ -3,51 +3,34 @@ package br.com.biblioteca.model;
 import java.time.LocalDate;
 
 public class Emprestimo {
-        private int id;
-        private int idLivro;
-        private int idUsuario;
-        private LocalDate dataEmprestimo;
-        private LocalDate dataPrevistaDevolucao;
+    private int idUsuario;
+    private int idLivro;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucaoPrevista;
 
-        // GETTERS
-        public int getId() {
-            return id;
-        }
-
-        public int getIdLivro() {
-            return idLivro;
-        }
-
-        public int getIdUsuario() {
-            return idUsuario;
-        }
-
-        public LocalDate getDataEmprestimo() {
-            return dataEmprestimo;
-        }
-
-        public LocalDate getDataPrevistaDevolucao() {
-            return dataPrevistaDevolucao;
-        }
-
-        // SETTERS
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public void setIdLivro(int idLivro) {
-            this.idLivro = idLivro;
-        }
-
-        public void setIdUsuario(int idUsuario) {
-            this.idUsuario = idUsuario;
-        }
-
-        public void setDataEmprestimo(LocalDate dataEmprestimo) {
-            this.dataEmprestimo = dataEmprestimo;
-        }
-
-        public void setDataPrevistaDevolucao(LocalDate dataPrevistaDevolucao) {
-            this.dataPrevistaDevolucao = dataPrevistaDevolucao;
-        }
+    // Construtor
+    public Emprestimo(int idUsuario, int idLivro, LocalDate dataEmprestimo, LocalDate dataDevolucaoPrevista) {
+        this.idUsuario = idUsuario;
+        this.idLivro = idLivro;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucaoPrevista = dataDevolucaoPrevista;
     }
+
+    // Getters
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public int getIdLivro() {
+        return idLivro;
+    }
+
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucaoPrevista() {
+        return dataDevolucaoPrevista;
+    }
+
+}

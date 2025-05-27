@@ -1,17 +1,20 @@
 package br.com.biblioteca.util;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Conexao {
 
-    public static Connection conectar() {
-        String url = "jdbc:mysql://localhost:3306/biblioteca";
-        String usuario = "root";
-        String senha = "rafaelTB07#";
+    private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "rafaelTB07#";
 
+    public static Connection conectar() {
         try {
-            return DriverManager.getConnection(url, usuario, senha);
+            return DriverManager.getConnection(URL, USUARIO, SENHA);
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar com o banco de dados");
-            e.printStackTrace();
+            System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
             return null;
         }
     }

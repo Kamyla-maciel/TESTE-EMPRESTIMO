@@ -1,0 +1,80 @@
+package br.com.biblioteca;
+
+import br.com.biblioteca.util.Conexao;
+import br.com.biblioteca.controller.EmprestimoController;
+import br.com.biblioteca.gui.TelaEmprestimo;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        System.out.println("Iniciando Sistema de Gestão de Biblioteca...");
+
+        // --- Teste de Conexão com o Banco de Dados ---
+        System.out.println("Testando conexão com o banco de dados...");
+        try (Connection conexao = Conexao.conectar();) {
+            if (conexao != null) {
+                System.out.println("Conexão com o banco de dados estabelecida com sucesso!");
+                // Aqui você pode adicionar um teste simples com seu DAO, por exemplo:
+                // LivroDAO livroDAO = new LivroDAO();
+                // System.out.println("Número de livros cadastrados: " + livroDAO.contarLivros());
+            } else {
+                System.err.println("Falha ao estabelecer conexão com o banco de dados. Verifique as configurações.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de SQL ao conectar ao banco de dados: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("Teste de conexão finalizado.");
+
+
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("\n--- Menu Principal ---");
+            System.out.println("1. Abrir Interface Gráfica (GUI)");
+            System.out.println("2. Executar Operação de Teste (Ex: Listar algo via Controller)");
+            System.out.println("0. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            try {
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Abrindo interface gráfica...");
+                        TelaEmprestimo telaEmprestimo = new TelaEmprestimo();
+                        telaEmprestimo.setVisible(true);
+                        break;
+                    case 2:
+                        System.out.println("Executando operação de teste...");
+                        // Exemplo de como você chamaria um método de um controller para teste:
+                        EmprestimoController emprestimoController = new EmprestimoController();
+                        // Suponha que você tenha um método para contar empréstimos:
+                        // int totalEmprestimos = emprestimoController.contarEmprestimos();
+                        // System.out.println("Total de empréstimos (via controller): " + totalEmprestimos);
+                        System.out.println("Operação de teste concluída.");
+                        break;
+                    case 0:
+                        System.out.println("Encerrando o sistema.");
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                scanner.nextLine(); // Limpa o buffer do scanner
+                opcao = -1; // Mantém o loop
+            }
+
+        } while (opcao != 0);
+
+        scanner.close(); // Fecha o scanner ao sair
+    }
+}
